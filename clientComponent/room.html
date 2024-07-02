@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Room</title>
+  <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" type="text/css" href="room.css">
+    <!-- FavIcon -->
+  <link rel="shortcut icon" href="./assets/favicon.ico" />
+</head>
+<!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+<body>
+  <a href="/">
+    <img id="logo" src="./assets/favicon.ico">
+  </a>
+
+  <h3 id="shareLink">Share this link to play with friends:<br/> <span id="link"></span> </h3>
+
+  <script>
+    var socket = io.connect();
+    // $( document ).ready(function() {
+    // console.log( "ready!" );
+     socket.on('roomId',function(data) {
+      var linkRef = document.getElementById('link');
+      linkRef.innerHTML = "http://blocksbattle.com/room#"+data.roomId;
+      console.log("from rooom ", data.roomId)
+     })
+  // });
+
+  </script>
+<!--   <script >
+
+    var socket = io.connect();
+     socket.on('broadcast',function(data) {
+
+          // $('#scoresTable').text(data.description.score)
+
+          console.log("the mappppppppppppppppppppppp")
+          console.log(data.keys);
+          console.log(data.values)
+
+         var scoreContainer = document.getElementById('scoresTable');
+         var content = '';
+          for(var i = 0;i<data.keys.length; i++){
+            // var el = document.createElement('li');
+            // el.innerHTML = data.keys[i] + " : "+ data.values[i] +"\n";
+            // scoreContainer.appendChild(el);
+            var userInfo =
+                `<div><h5>${data.keys[i]} : ${data.values[i]}</h5></div>`
+                content+=userInfo;
+
+
+          }
+          scoreContainer.innerHTML = content;
+        // updateScores(data);
+
+        // console.log(data.description)
+    //     el.innerHTML = "hellooo";
+         // document.body.innerHTML = '';
+         // document.write(data.description);
+      });
+
+     socket.on('initialBroadcast', function(data){
+      // console.log('initialBroadcastsssss')
+      console.log(data.name+ " " + data.score);
+     })
+    //  function updateScores(data){
+    //   let info = data.description;
+    //   let content = '';
+    // // //     el.setAttribute('id', name);
+
+    //   // var ul = document.getElementById('liste');
+    // // console.log(li)
+    // // var troisieme_ville = li[2];
+    // // var nouvelle_ville = document.getElementById('remplacement').value;
+
+    // // // now put this value into the li tag by setting the .innerHTML
+    // // troisieme_ville.innerHTML = nouvelle_ville;
+
+
+    //   for(var i = 0; i<data.clients; i++){
+    //   // var li = scoreContainer.getElementsByTagName('li');
+    //   // li.innerHTML = "";
+    //     // scoreContainer = "";
+    //     scoreContainer.appendChild(el)
+    //     // scoreContainer.innerHTML  = data.description.name + " : "+ data.description.score +"\n";
+
+    //   }
+    //  }
+
+  </script> -->
+  <div id="scoresTable">
+      <!-- <p id="highScoreTitle" style="">High Scores</p> -->
+      <!-- <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="scoresTableList"> -->
+          <!-- <tr id="scoresTableList"> -->
+
+          <!-- </tr> -->
+        <!-- </tbody>
+      </table> -->
+
+<table class="rwd-table">
+  <tr>
+    <th>Name</th>
+    <th>Score</th>
+  </tr>
+  <tbody id="scoresTableList">
+    
+  </tbody>
+  <!-- <tr>
+    <td data-th="Movie Title">Star Wars</td>
+    <td data-th="Genre">Adventure, Sci-fi</td>
+  </tr> -->
+</table>
+
+
+    <!-- <ul id="scoresTableList">
+    </ul> -->
+  </div>
+  <!-- <img id="grid" src="grid.png" height="200" width="150" > -->
+
+  <div class="flex-container-rows">
+    <div id="flex-container-localRow">
+      <div class="textBox-left">
+       <!--  <div class="logoFlexBox">
+          <img class="tetrisLogo" src="media/logo.png">
+        </div> -->
+        <!-- NEED TO SHOW THIS PART WHEN THE GAME IS ABOUT TO BEGIN FOR 3 SECODNS -->
+       <!--  <div class="controls">
+          <h2>Controls</h2>
+          <p><span>Left: </span>'a'</p>
+          <p><span>Right: </span>'d'</p>
+          <p><span>Down: </span>'s'</p>
+          <p><span>Quick Drop: </span>'Space bar'</p>
+          <p><span>Rotate Clockwise: </span>'e'</p>
+          <p><span>Rotate Counter-Clockwise: </span>'q'</p>
+          <p><span>Pause: </span>'p'</p>
+        </div> -->
+        <div class="quitButtonContainer">
+          <!-- <a class="quitButton" href="/">Return to main menu</a> -->
+        </div>
+      </div>
+      <div id="localContainer" class="mainGame">
+        <div class="pauseMenuButtons">
+            <!-- <button id="restartButton">restart</button> -->
+        </div>
+      </div>
+      <!-- <div id="chatBox"></div> -->
+    </div>
+    <div id="flex-container-remoteRow">
+      <div id="remoteContainer" class="remoteGames"></div>
+    </div>
+  </div>
+
+
+
+      <!-- <canvas class="shadowCanvas" id="shadow_canvas" width="450px" height="400px" style="z-index:1" ></canvas> -->
+  <template id="player-template">
+    <div class="player game">
+
+      <canvas class="gameCanvas" id="canvas" width="450px" height="400px" style="z-index:2"></canvas>
+    </div>
+  </template>
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script type="text/javascript" src="utilities/utilities.js"></script>
+  <script type="text/javascript" src="components/ConnectionManager.js"></script>
+  <script type="text/javascript" src="components/EventHandler.js"></script>
+  <script type="text/javascript" src="components/Piece.js"></script>
+  <script type="text/javascript" src="components/Board.js"></script>
+  <script type="text/javascript" src="components/Player.js"></script>
+  <script type="text/javascript" src="components/Game.js"></script>
+  <script type="text/javascript" src="components/Manager.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+ <!--  <style type="text/css">
+    .mainGame{
+      height: 100%;
+      width: 450px;
+      /*left: 200px;*/
+    }
+  </style> -->
+</body>
+</html>

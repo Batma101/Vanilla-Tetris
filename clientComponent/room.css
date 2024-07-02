@@ -1,0 +1,401 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: 
+  linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+  font-family: 'Audiowide', cursive;
+
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+
+}
+
+
+
+span {
+  display: inline;
+}
+
+.flex-container-rows {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#flex-container-localRow {
+  z-index/*: 10;
+  height: 0%;
+  width:0%;*/
+/*  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;*/
+}
+/*TODO: double check when the server is running*/
+.textBox-left {
+
+  height: 0%;
+  width: 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.controls {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: #FFEC92;
+  font-size: 1.3rem;
+}
+
+.controls h2 {
+  margin: 5px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls p {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoFlexBox {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.tetrisLogo {
+  width:80%;
+}
+
+.quitButtonContainer {
+  height: 10%;
+}
+/*TODO make the button smaller*/
+.quitButton {
+  position: relative;
+  padding: 8px 30px;
+  margin: 0px 8px 8px 0px;
+  float: left;
+  border-radius: 10px;
+  font-size: 25px;
+  color: #FFF;
+  text-decoration: none;
+  background-color: #F0BB18;
+  border-bottom: 5px solid #B99116;
+  text-shadow: 0px -2px #B99116;
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+}
+
+.quitButton:active {
+  transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+  border-bottom: 1px solid;
+}
+
+.mainGame {
+  height: 95%;
+  width: 0%;
+  position: absolute; /*/////////////////////////////*/
+  left: 500px; /*/////////////////////////////*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: rgba(84, 84, 255, .2);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+/*TODO: fix when chatbox is added*/
+#chatBox {
+  height: 100%;
+  width: 33%;
+}
+
+
+#flex-container-remoteRow {
+  padding-left: 0px;
+  height:100%;
+  width:40%;
+  position: relative;
+  left: 700px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#remoteContainer {
+  height: 25%;
+  width: 100%;
+  left: 0px;
+  top: -125px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 5px;
+  /*background-color: lightblue;*/
+  box-shadow: inset 0px 0px 19px -1px rgba(0,0,0,0.4);
+}
+
+div#remoteContainer.remoteGames .gameCanvas{
+  height: 150px;
+  position: relative;
+  top: 3px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#localContainer .gameCanvas .shadowCanvas {
+  border: 3px solid yellow;
+}
+
+#remoteContainer .gameCanvas .shadowCanvas {
+  height: 100%;
+  top: 100px;
+  /*display: block;*/
+  margin: auto;
+  border: 5px solid black;
+  position: fixed
+}
+
+#scoresTable{
+  border: 10px;
+  position: relative;
+  float: left;
+  /*display: inline;*/
+}
+
+table {
+  font-family: Verdana;
+  font-size: 14px;
+  border-collapse: collapse;
+  /*width: 130px;*/
+  border: 0.5px solid black;
+  position: relative;
+  left: 100px;
+  top: 175px;
+  
+}
+
+td, th {
+  padding: 0px;
+  text-align: left;
+  margin: 0;
+  border: 0.5px solid black;
+
+}
+
+tbody tr:nth-child(2n){
+  background-color: #eee;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: white;
+}
+
+/*td {
+  size: 10px;
+  width: 10px;
+  height: 10px;
+}*/
+
+h3{
+  /*top:50;*/
+  color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+h5{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#shareLink{
+  position: absolute;
+  display: inline;
+  top: 0px;
+  left: 275px;
+/*  top: 343/*;
+
+  /*font-size: 55*/
+}
+
+/*h3 #sharelink{
+  font-size: 50
+}*/
+
+/*.mainGame {
+
+}*/
+
+
+
+
+
+
+
+
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,400,700";
+.rwd-table {
+  margin: 1em 0;
+  min-width: 100px;
+}
+.rwd-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  max-height: 10px;
+}
+.rwd-table th {
+  display: none;
+}
+.rwd-table td {
+  display: block;
+}
+.rwd-table td:first-child {
+  padding-top: .5em;
+}
+.rwd-table td:last-child {
+  padding-bottom: .5em;
+}
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 3.5em;
+  display: inline-block;
+}
+@media (min-width: 480px) {
+  .rwd-table td:before {
+    display: none;
+  }
+}
+.rwd-table th, .rwd-table td {
+  text-align: left;
+}
+@media (min-width: 480px) {
+  .rwd-table th, .rwd-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .rwd-table th:first-child, .rwd-table td:first-child {
+    padding-left: 0;
+  }
+  .rwd-table th:last-child, .rwd-table td:last-child {
+    padding-right: 0;
+  }
+}
+
+/*body {
+  padding: 0 2em;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+  background: #eee;
+}*/
+
+h1 {
+  font-weight: normal;
+  letter-spacing: -1px;
+  color: #34495E;
+}
+
+.rwd-table {
+  background: #34495E;
+  color: #fff;
+  border-radius: .4em;
+  overflow: hidden;
+  /*left: -10px;*/
+
+}
+.rwd-table tr {
+  border-color: #46637f;
+}
+.rwd-table th, .rwd-table td {
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .rwd-table th, .rwd-table td {
+    padding: 1em !important;
+  }
+}
+.rwd-table th, .rwd-table td:before {
+  color: #dd5;
+}
+
+
+
+
+#logo{
+  width: 90px;
+  height: 90px;
+  margin-left: 10px;
+  margin-top: 5px;
+  z-index: 90;
+  position: fixed
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Blocks Battle</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+        <!-- FavIcon -->
+    <link rel="shortcut icon" href="./assets/favicon.ico" />
+  </head>
+  <body>
+    <div id="logoFlexBox">
+      <h1 class="title">Blocks Battle</h1>
+  
+    </div>
+    <div id="menuContainer" class="hidden"></div>
+    <div id="newRoomContainer">
+      <a href="/room" class="newRoomButton shadow">New Game</a>
+      <a href="#" class="activeGameButton shadow getActiveRooms">Active Games</a>
+    </div>
+    <!-- <img src="./assets/homepageWallpaper.png" alt="home page wallpaper" id="homepage"> -->
+    <!-- <div id="show">
+      <a href="#" class="show">show div</a>
+    </div> -->
+
+      <script>
+        const menuContainer = document.getElementById('menuContainer');
+        window.addEventListener('load', getMenuData)
+
+        const updateChecker = setInterval(getMenuData, 1000)
+
+          function getMenuData(event) {
+            var req = new XMLHttpRequest();
+            req.open('GET', '/menu-update', true);
+
+            req.onload = function() {
+              if (req.status >= 200 && req.status < 400) {
+                // Success!
+                var data = JSON.parse(req.responseText);
+                //Generate innerHTML of menuContainer div to represent selectable rooms
+                updateMenu(data)
+
+              } else {
+                // We reached our target server, but it returned an error
+                //TODO:::: HAVE TO TAKE CARE OF THIS AFTER WE GET AN INITIAL WORKING GAME
+              }
+            };
+
+            req.onerror = function() {
+              // There was a connection error of some sort
+            };
+
+            req.send();
+          }
+
+          function updateMenu(array = []) {
+            console.log("1");
+            let content = '';
+            if(array.length) {
+              for (let i = 0; i < array.length; i++) {
+
+                //TODO:::::: although here it says that there can only be 5 players in a room, if you click fast enough at 4/5, youcan actually create more players
+                //definitely need to fix later after its stable
+                const link = array[i].pop >= 5
+                                ? `<p class="full-button">FULL</p>`
+                                : `<a class="btnn" href="/room#${array[i].room}">JOIN</a>`
+
+
+                const room =
+                       `<div class="roomContainer">
+                        <div class="roomName">
+                          <h5>Room ${i+1}:  ${array[i].pop} / 5 </h5>
+
+                        </div>
+
+                        <div class="roomLink">
+                          ${link}
+                        </div>
+                      </div><br>`;
+                content += room
+              }
+            } else {
+              //create single div showing no rooms available
+              content=`<div class='roomContainer'>NO ACTIVE ROOMS</div>`
+            }
+            menuContainer.innerHTML = content+"\n";
+          }
+
+
+
+          $(document).ready(function(){
+
+            //if you wish to keep both the divs hidden by default then dont forget to hide //them
+            $(".hidden").hide();
+            // $("#about-content").hide();
+
+           $(".getActiveRooms").click(function(){
+                 // $("#help-content").hide();
+                 $(".hidden").slideToggle();
+            });
+
+           // $("#help-anchor").click(function(){
+           //      $("#help-content").show();
+           //       ("#about-content").hide();
+           // });
+          });
+
+        </script>
+
+      
+        
+
+      </body>
+</html>
